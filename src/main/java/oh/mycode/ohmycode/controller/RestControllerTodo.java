@@ -18,11 +18,6 @@ public class RestControllerTodo {
     @Autowired
     TodoService todoService;
 
-    @PostMapping("/saveTodo")
-    public Todo todoPost(Todo todo) {
-
-        return todoService.saveTodo(todo);
-    }
     @GetMapping("/getTodos")
     public List<Todo> getTo(){
         return todoService.allTodos();
