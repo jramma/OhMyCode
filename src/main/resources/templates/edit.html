@@ -4,81 +4,43 @@
       xmlns:v-bind="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="utf-8">
-    <title>Your Todos</title>
+    <title>Add ToDo</title>
     <link th:href="@{/css/main.css}" rel="stylesheet">
-    <link href="css/main.css" rel="stylesheet" type="text/css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
 </head>
 <body>
-
-<div class="container">
-    <div class="tutorial">
-        <ul>
-            <li>Home</li>
-            <!-- <li>Blog</li>
-            <li>Services<i class="fa fa-angle-down"></i>
-                <ul>
-                    <li>Graphic Design</li>
-                    <li>Website Design</li>
-                    <li>Python Programming</li>
-                    <li>PHP Programming</li>
-                </ul>
-            </li>
-            <li>Tutorials<i class="fa fa-angle-down"></i>
-                <ul>
-                    <li>CSS<span>12 Available</span></li>
-                    <li>HTML<span>9 Available</span></li>
-                    <li>Jade<span>3 Available</span></li>
-                    <li>Javascript<span>21 Available</span></li>
-                    <li>Design<span>37 Available</span></li>
-                </ul>
-            </li> -->
-            <li>Log Out</li>
-        </ul>
-
-
+<nav class="navbar navbar-expand-lg bg-body-tertiary">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="/">TodoList</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" href="/">Home</a>
+                </li>
+            </ul>
+        </div>
     </div>
-</div>
+</nav>
+<form>
+    <div class="mb-3">
+        <label for="exampleInputEmail1" class="form-label">Email address</label>
+        <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+        <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
+    </div>
+    <div class="mb-3">
+        <label for="exampleInputPassword1" class="form-label">Password</label>
+        <input type="password" class="form-control" id="exampleInputPassword1">
+    </div>
+    <div class="mb-3 form-check">
+        <input type="checkbox" class="form-check-input" id="exampleCheck1">
+        <label class="form-check-label" for="exampleCheck1">Check me out</label>
+    </div>
+    <button type="submit" class="btn btn-primary">Add Todo</button>
+</form>
 
-
-
-<main id="todolist">
-    <h1>
-        Todo List
-        <span>Get things done, one item at a time.</span>
-    </h1>
-
-    <template v-if="todo.length">
-        <transition-group name="todolist" tag="ul">
-            <li v-for="item in todoByStatus" v-bind:class="item.done ? 'done' : ''" v-bind:key="item.id">
-                <span class="label">{{item.label}}</span>
-                <div class="actions">
-                    <button class="btn-picto" type="button" v-on:click="markAsDoneOrUndone(item)"
-                            v-bind:aria-label="item.done ? 'Undone' : 'Done'"
-                            v-bind:title="item.done ? 'Undone' : 'Done'">
-                        <i aria-hidden="true" class="material-icons">{{ item.done ? 'check_box' :
-                            'check_box_outline_blank' }}</i>
-                    </button>
-                    <button class="btn-picto" type="button" v-on:click="deleteItemFromList(item)" aria-label="Delete"
-                            title="Delete">
-                        <i aria-hidden="true" class="material-icons">delete</i>
-                    </button>
-                </div>
-            </li>
-        </transition-group>
-        <togglebutton
-                label="Move done items at the end?"
-                name="todosort"
-                v-on:clicked="clickontoogle"/>
-    </template>
-    <p v-else class="emptylist">Your todo list is empty.</p>
-
-    <form name="newform" v-on:submit.prevent="addItem">
-        <label for="newitem">Add to the todo list</label>
-        <input type="text" name="newitem" id="newitem" v-model="newitem">
-        <button type="submit">Add item</button>
-    </form>
-</main>
-<script href="js/index.js"></script>
 
 </body>
 </html>

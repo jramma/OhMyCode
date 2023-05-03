@@ -3,6 +3,7 @@ package oh.mycode.ohmycode.controller;
 
 import oh.mycode.ohmycode.dto.TodoCityDto;
 import oh.mycode.ohmycode.model.Todo;
+import oh.mycode.ohmycode.model.User;
 import oh.mycode.ohmycode.service.TodoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -13,6 +14,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.ui.Model;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
@@ -40,10 +42,10 @@ public class TodoController {
         }
 
         model.addAttribute("todos", pageTodo.getContent());
-        model.addAttribute("current", page+1);
-        model.addAttribute("next", page+2);
+        model.addAttribute("current", page + 1);
+        model.addAttribute("next", page + 2);
         model.addAttribute("prev", page);
-        model.addAttribute("last",totalPage);
+        model.addAttribute("last", totalPage);
         return "listado";
     }
 // http://localhost:8080/
@@ -67,13 +69,20 @@ public class TodoController {
     }
 
     @RequestMapping("/add")
-    public String create(Model model){
+    public String create(Model model) {
         Todo todo = new Todo();
         model.addAttribute("todo", todo);
+        List<User> usuarios = todoService.allUser();
+        List<String> nombres = new ArrayList<>();
+        for (int i = 0; i < usuarios.size(); i++) {
+            nombres.add(usuarios.get(i).getUsername());
+        }
+        model.addAttribute("users", usuarios);
         return "addTodo";
     }
+
     @PutMapping("/edit")
-    public String edit(){
+    public String edit() {
         return null;
     }
 

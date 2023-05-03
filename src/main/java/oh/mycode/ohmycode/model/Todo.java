@@ -23,5 +23,9 @@ public class Todo {
     // ManyToOne
 
 
-
+    public Todo(String title, User user) {
+        this.title = title;
+        this.user = user;
+        this.completed = false;
+    }
 }
