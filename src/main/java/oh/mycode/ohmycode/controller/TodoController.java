@@ -2,6 +2,7 @@ package oh.mycode.ohmycode.controller;
 
 
 import oh.mycode.ohmycode.dto.TodoCityDto;
+import oh.mycode.ohmycode.model.Todo;
 import oh.mycode.ohmycode.service.TodoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -9,11 +10,8 @@ import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.Collections;
 import java.util.List;
@@ -68,10 +66,11 @@ public class TodoController {
         return new PageImpl<>(pageList, pageable, list.size());
     }
 
-    @PostMapping("/create")
-    public String create(){
-
-        return null;
+    @RequestMapping("/add")
+    public String create(Model model){
+        Todo todo = new Todo();
+        model.addAttribute("todo", todo);
+        return "addTodo";
     }
     @PutMapping("/edit")
     public String edit(){
