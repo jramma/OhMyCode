@@ -8,4 +8,3 @@ De momento solo tiene un endpoint http://localhost:8080/ es la página de inicio
 
 Páginado a 10
 
-https://user-images.githubusercontent.com/107991714/235950390-fec9d4a4-9109-4498-8a5a-39b589bca82e.mp4
