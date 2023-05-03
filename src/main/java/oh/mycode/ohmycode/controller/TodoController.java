@@ -28,21 +28,23 @@ public class TodoController {
     TodoService todoService;
 
 
-    @GetMapping("/inicio")
+    @GetMapping("/")
     public String inicio(@RequestParam Map<String, Object> params, Model model) {
         int page = params.get("page") != null ? (Integer.valueOf(params.get("page").toString()) - 1) : 0;
         PageRequest pageRequest = PageRequest.of(page, 10);
         Page<TodoCityDto> pageTodo = getTodoCityPage(pageRequest);
+
         int totalPage = pageTodo.getTotalPages();
         if (totalPage > 0) {
             List<Integer> pages = IntStream.rangeClosed(1, totalPage).boxed().collect(Collectors.toList());
             model.addAttribute("pages", pages);
-
-
         }
-        List<TodoCityDto> list = todoService.allTodosCity();
-        model.addAttribute("todos", list);
 
+        model.addAttribute("todos", pageTodo.getContent());
+        model.addAttribute("current", page+1);
+        model.addAttribute("next", page+2);
+        model.addAttribute("prev", page);
+        model.addAttribute("last",totalPage);
         return "listado";
     }
 // http://localhost:8080/inicio
