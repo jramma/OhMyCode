@@ -3,7 +3,6 @@ package oh.mycode.ohmycode.controller;
 
 import oh.mycode.ohmycode.dto.TodoCityDto;
 import oh.mycode.ohmycode.service.TodoService;
-import oh.mycode.ohmycode.util.RenderPage;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
@@ -47,7 +46,7 @@ public class TodoController {
         model.addAttribute("last",totalPage);
         return "listado";
     }
-// http://localhost:8080/inicio
+// http://localhost:8080/
 
 
     public Page<TodoCityDto> getTodoCityPage(Pageable pageable) {
