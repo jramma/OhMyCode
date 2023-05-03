@@ -5,6 +5,7 @@ import oh.mycode.ohmycode.model.User;
 import oh.mycode.ohmycode.service.TodoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
@@ -22,5 +23,7 @@ public class RestControllerTodo {
     public List<User> getUser(){
         return todoService.allUser();
     }
+
+
 
 }

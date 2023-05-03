@@ -72,14 +72,18 @@ public class TodoController {
     public String create(Model model) {
         Todo todo = new Todo();
         model.addAttribute("todo", todo);
-        List<User> usuarios = todoService.allUser();
-        List<String> nombres = new ArrayList<>();
-        for (int i = 0; i < usuarios.size(); i++) {
-            nombres.add(usuarios.get(i).getUsername());
-        }
-        model.addAttribute("users", usuarios);
+        List<User> users = todoService.allUser();
+        model.addAttribute("users", users);
         return "addTodo";
     }
+    @PostMapping("/saveTodo")
+    public String saveTodo(Todo todo){
+        todoService.saveTodo(todo);
+        return "listado";
+    }
+
+
+
 
     @PutMapping("/edit")
     public String edit() {
