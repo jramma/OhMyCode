@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+
+<html lang="en" xmlns:th="https://www.thymeLeaf.org" xmlns:v-on="http://www.w3.org/1999/xhtml"
+      xmlns:v-bind="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8">
+    <title>Todo App</title>
+</head>
+<body>
+    <nav th:fragment="paginador">
+        <ul class="pagination">
+            <li class="page-item" th:each="item:${page.paginas}" th:class = "${item.actual? 'page-item active':'page-item'}">
+                <span class="page-link" th:if="${item.actual}" th:text="${item.num}"></span>
+                <a class="page-link" th:if="${not item.actual}" th:href="@{${page.url}{page=${item.num-1}}}" th:text="${item.num}"></a>
+            </li>
+        </ul>
+    </nav>
+</body>
+</html>

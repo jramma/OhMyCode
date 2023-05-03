@@ -46,7 +46,23 @@
         </tr>
         </tbody>
     </table>
-
+    <div class="row">
+        <div class="col-md-2"></div>
+        <div class="col-md-8">
+            <nav aria-label="Pagination">
+                <ul class="pagination jsutify-content-center">
+                    <li class="page-item" th:each="page : ${pages}">
+                        <a class="page-link" th:href="@{|/?page=${pages}|" th:text="${pages}"></a>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+        <div class="col-md-2">
+        </div>
+    </div>
+    <div th:if="${todos.isEmpty()}">
+        <p>The Todos List is emtpy!</p>
+    </div>
 
 </main>
 <script type="text/javascript" th:src="@{/js/index.js}"></script>
