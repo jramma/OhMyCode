@@ -1,0 +1,36 @@
+[
+  {
+    "id": 1,
+    "title": "limpiar cocina",
+    "completed": false,
+    "user": {
+      "id": 1,
+      "name": "Juan",
+      "username": "juanTo",
+      "password": "password",
+      "address": {
+        "street": "c calle china",
+        "city": "Shanghai",
+        "zipcode": "12345",
+        "country": "China"
+      }
+    }
+  },
+  {
+    "id": 2,
+    "title": "Escribir mail",
+    "completed": false,
+    "user": {
+      "id": 1,
+      "name": "Juan",
+      "username": "juanTo",
+      "password": "password",
+      "address": {
+        "street": "c calle china",
+        "city": "Shanghai",
+        "zipcode": "12345",
+        "country": "China"
+      }
+    }
+  }
+]

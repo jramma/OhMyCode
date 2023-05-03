@@ -1,49 +1,55 @@
 <!DOCTYPE html>
 
-<html lang="en" xmlns:th="https://www.thymeLeaf.org">
+<html lang="en" xmlns:th="https://www.thymeLeaf.org" xmlns:v-on="http://www.w3.org/1999/xhtml"
+      xmlns:v-bind="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="utf-8">
-    <title>Todo</title>
-
-    <!-- Importar CSS de Bootstrap -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.3.2/css/bootstrap.min.css" integrity="sha512-VL/n2Qeh9KHVb/GD/hYnsy/K1FBDxjtpwvPCezlAazNK24VfL2Q9Xn/85grUDCnYVql+pYoyN1B+GnZg/6fMg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-
-    <!-- Importar tu propio CSS -->
-    <link href="css/main.css" rel="stylesheet" type="text/css">
-
+    <title>Todo App</title>
+    <link th:href="@{/css/main.css}" rel="stylesheet">
 
 </head>
-
 <body>
 
+<div class="container">
+    <div class="tutorial">
+        <ul>
+            <li>Home</li>
+            <li>Log in</li>
+            <li>Sign up</li>
+        </ul>
 
-<div th:each="elemento : ${pagina.content}">
-    <p th:text="${elemento.nombre}"></p>
-    <p th:text="${elemento.descripcion}"></p>
-</div>
-<div th:if="${pagina.totalPages > 1}">
-    <ul class="pagination">
-        <li class="page-item" th:classappend="${currentPage == 0} ? disabled">
-            <a class="page-link" th:href="@{/lista(page=0)}">Primera</a>
-        </li>
-        <li class="page-item" th:classappend="${currentPage == 0} ? disabled">
-            <a class="page-link" th:href="@{/lista(page=${currentPage - 1})}">Anterior</a>
-        </li>
-        <li class="page-item" th:each="i : ${#numbers.sequence(0, pagina.totalPages - 1)}">
-            <a class="page-link" th:href="@{/lista(page=${i})}" th:text="${i + 1}"
-               th:classappend="${currentPage == i} ? active"></a>
-        </li>
-        <li class="page-item" th:classappend="${currentPage == pagina.totalPages - 1} ? disabled">
-            <a class="page-link" th:href="@{/lista(page=${currentPage + 1})}">Siguiente</a>
-        </li>
-        <li class="page-item" th:classappend="${currentPage == pagina.totalPages - 1} ? disabled">
-            <a class="page-link" th:href="@{/lista(page=${pagina.totalPages - 1})}">Última</a>
-        </li>
-    </ul>
+    </div>
 </div>
 
-<!-- Importar JavaScript de Bootstrap -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.3.2/js/bootstrap.min.js" integrity="sha512-OCX2YH/C0D4v0g4cdW5KKaA5w12dOOnzro8utUpbNgYX9RtOTrxKx2A05lFsczyDkbwE7l/zeiWRNZsmSeZtsg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+<main id="todolist">
+    <h1>
+        Todo List
+        <span>Get things done, one item at a time.</span>
+    </h1>
+
+    <table id="myTable">
+        <thead>
+        <tr>
+            <th>Title</th>
+            <th>Username</th>
+            <th>Country</th>
+            <th>Done</th>
+        </tr>
+        </thead>
+        <tbody v-else>
+        <tr th:each="todo : ${todos}">
+            <td th:text="${todo.text}"></td>
+            <td th:text="${todo.user}"></td>
+            <td th:text="${todo.country}"></td>
+            <td th:text="${todo.completed}"></td>
+        </tr>
+        </tbody>
+    </table>
+
+
+</main>
+<script type="text/javascript" th:src="@{/js/index.js}"></script>
 
 </body>
 </html>

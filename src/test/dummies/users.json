@@ -1,0 +1,26 @@
+[
+  {
+    "id": 3,
+    "name": "Juan",
+    "username": "juanTo",
+    "password": "password",
+    "address": {
+      "street": "c calle china",
+      "city": "Shanghai",
+      "zipcode": "12345",
+      "country": "China"
+    }
+  },
+  {
+    "id": 4,
+    "name": "Marta",
+    "username": "martaVa",
+    "password": "password1",
+    "address": {
+      "street": "c San Antonio",
+      "city": "Barcelona",
+      "zipcode": "08080",
+      "country": "Spain"
+    }
+  }
+]
