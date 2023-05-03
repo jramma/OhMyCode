@@ -11,6 +11,8 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.Collections;
@@ -64,6 +66,16 @@ public class TodoController {
         }
 
         return new PageImpl<>(pageList, pageable, list.size());
+    }
+
+    @PostMapping("/create")
+    public String create(){
+
+        return null;
+    }
+    @PutMapping("/edit")
+    public String edit(){
+        return null;
     }
 
 
