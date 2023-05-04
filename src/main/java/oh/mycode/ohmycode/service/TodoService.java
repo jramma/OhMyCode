@@ -1,6 +1,6 @@
 package oh.mycode.ohmycode.service;
 
-import oh.mycode.ohmycode.dto.TodoCityDto;
+import oh.mycode.ohmycode.dto.TodoDto;
 import oh.mycode.ohmycode.model.Todo;
 import oh.mycode.ohmycode.model.User;
 import oh.mycode.ohmycode.repos.TodoRepo;
@@ -29,10 +29,11 @@ public class TodoService {
         return todoRepo.save(todo);
 
     }
-    public List<TodoCityDto> allTodosCity() {
+    public List<TodoDto> allTodosCity() {
         return allTodos()
                 .stream()
-                .map(todo -> new TodoCityDto(
+                .map(todo -> new TodoDto(
+                        todo.getId(),
                         todo.getTitle(),
                         todo.getUser().getUsername(),
                         todo.getUser().getAddress().getCity(),
@@ -47,6 +48,9 @@ public class TodoService {
 
     public User findByUsername(String username){
         return userRepo.findByUsername(username);
+    }
+    public Todo getToDoById(int id){
+        return todoRepo.findTodoById(id);
     }
 
 }
