@@ -45,6 +45,8 @@ public class TodoService {
         return userRepo.save(user);
     }
 
-
+    public User findByUsername(String username){
+        return userRepo.findByUsername(username);
+    }
 
 }

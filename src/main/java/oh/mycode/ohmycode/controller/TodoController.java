@@ -2,6 +2,7 @@ package oh.mycode.ohmycode.controller;
 
 
 import oh.mycode.ohmycode.dto.TodoCityDto;
+import oh.mycode.ohmycode.dto.TodoNotSaved;
 import oh.mycode.ohmycode.model.Todo;
 import oh.mycode.ohmycode.model.User;
 import oh.mycode.ohmycode.service.TodoService;
@@ -13,8 +14,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.ui.Model;
-
-import java.util.ArrayList;
+import oh.mycode.ohmycode.util.Increment;
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
@@ -31,7 +31,9 @@ public class TodoController {
 
     @GetMapping("/")
     public String inicio(@RequestParam Map<String, Object> params, Model model) {
+
         int page = params.get("page") != null ? (Integer.valueOf(params.get("page").toString()) - 1) : 0;
+
         PageRequest pageRequest = PageRequest.of(page, 10);
         Page<TodoCityDto> pageTodo = getTodoCityPage(pageRequest);
 
@@ -70,16 +72,20 @@ public class TodoController {
 
     @RequestMapping("/add")
     public String create(Model model) {
-        Todo todo = new Todo();
-        model.addAttribute("todo", todo);
-        List<User> users = todoService.allUser();
-        model.addAttribute("users", users);
+        model.addAttribute("todoNotSaved", new TodoNotSaved());
+        model.addAttribute("users", todoService.allUser());
         return "addTodo";
     }
     @PostMapping("/saveTodo")
-    public String saveTodo(Todo todo){
-        todoService.saveTodo(todo);
-        return "listado";
+    public String saveTodo(@ModelAttribute TodoNotSaved todoNotSaved, @RequestParam("username") String username){
+        List<Todo> alltodo =todoService.allTodos();
+        int id= Increment.autoIncrement(alltodo);
+        User user = todoService.findByUsername(username);
+        Todo todo1= new Todo(id,todoNotSaved.getText(),false, user);
+        if(todo1.getUser() !=null) {
+            todoService.saveTodo(todo1);
+        }
+        return "redirect:/";
     }
 
 

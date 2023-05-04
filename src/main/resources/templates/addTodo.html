@@ -24,23 +24,27 @@
         </div>
     </div>
 </nav>
-<form th:action="@{/saveTodo}" th:object="${todo}" method="post">
+
+<form th:action="@{/saveTodo}" th:object="${todoNotSaved}" method="post">
     <div class="mb-3">
         <label class="form-label">Title</label>
-        <input type="text" name="title" th:field="*{title}" class="form-control" placeholder="Introduce the Todo" required>
+        <input type="text" name="title" th:field="*{text}" class="form-control" placeholder="Introduce the Todo" required>
     </div>
 
     <div class="col-md">
         <div class="form-floating">
-            <select class="form-select" id="floatingSelectGrid" name="user">
+            <select class="form-select" id="floatingSelectGrid" name="user" onchange="document.getElementById('username').value=this.options[this.selectedIndex].text;">
                 <option selected disabled>Selecciona un usuario</option>
-                <option th:each="user : ${users}" th:value="${user.id}" th:text="${user.username}"></option>
+                <option th:each="user : ${users}" th:value="*{username}" th:text="${user.username}"></option>
             </select>
             <label for="floatingSelectGrid">User</label>
         </div>
     </div>
+    <input type="hidden" name="username" id="username" th:value="${todoNotSaved.username}" />
+    <br>
     <button type="submit" class="btn btn-primary">Add Todo</button>
 </form>
+
 
 
 </body>

@@ -6,9 +6,9 @@ import oh.mycode.ohmycode.model.User;
 import java.util.Comparator;
 import java.util.List;
 
-public class Utils {
+public class Increment {
 
-    public int autoIncrement(List<Todo> list) {
+    public static int autoIncrement(List<Todo> list) {
         int id;
         if (list.isEmpty()) {
             id = 1;
@@ -18,7 +18,7 @@ public class Utils {
         return id;
     }
 
-    public int idIncrement(List<User> list) {
+    public static int idIncrement(List<User> list) {
         int id;
         if (list.isEmpty()) {
             id = 1;
