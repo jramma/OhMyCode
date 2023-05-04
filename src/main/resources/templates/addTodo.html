@@ -28,7 +28,7 @@
 <form th:action="@{/saveTodo}" th:object="${todoNotSaved}" method="post">
     <div class="mb-3">
         <label class="form-label">Title</label>
-        <input type="text" name="text" th:field="*{title}" class="form-control" placeholder="Introduce the Todo" required>
+        <input type="text" name="text" th:field="*{title}" class="form-control" placeholder="Introduce the Todo" maxlength="200" required>
     </div>
 
     <div class="col-md">
