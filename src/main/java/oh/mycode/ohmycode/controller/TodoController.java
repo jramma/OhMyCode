@@ -86,11 +86,11 @@ public class TodoController {
         if (todoNotSaved.getId() == 0) {
             id = Increment.autoIncrement(alltodo);
             User user = todoService.findByUsername(username);
-            todo1 = new Todo(id, todoNotSaved.getText(), todoNotSaved.isCompleted(), user);
+            todo1 = new Todo(id, todoNotSaved.getTitle(), todoNotSaved.isCompleted(), user);
         } else {
             id = todoNotSaved.getId();
             todo1 = todoService.getToDoById(id);
-            todo1.setTitle(todoNotSaved.getText());
+            todo1.setTitle(todoNotSaved.getTitle());
             todo1.setCompleted(todoNotSaved.isCompleted());
         }
         todoService.saveTodo(todo1);
@@ -103,7 +103,8 @@ public class TodoController {
     public ModelAndView edit(@PathVariable(name = "id") int id) {
         ModelAndView model = new ModelAndView("addTodo");
         Todo todo = todoService.getToDoById(id);
-        model.addObject("todoNotSaved", todo);
+        TodoDto dto = new TodoDto(todo.getId(), todo.getTitle(), todo.getUser().getUsername(), todo.getUser().getAddress().getCountry(), todo.isCompleted());
+        model.addObject("todoNotSaved", dto);
         return model;
     }
 
