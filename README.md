@@ -26,3 +26,10 @@ https://user-images.githubusercontent.com/107991714/236172306-af921516-ec8b-46bf
 
 https://user-images.githubusercontent.com/107991714/236172398-b171d55c-80fe-4155-8db9-16040adf5333.mp4
 
+# Security
+
+Funciona, en WebSecurityConfig tienes un método comentado que te imprime en consola la contraseña ("password") Encoded por si quieres probarlo en PostMan
+
+![image](https://user-images.githubusercontent.com/107991714/236324548-5ec7a208-47ab-4b5f-b3a6-73a9f3cb6d60.png)
+
+
