@@ -1,9 +1,6 @@
 package oh.mycode.ohmycode.security.config;
 
 
-import oh.mycode.ohmycode.security.jwt.JwtEntryPoint;
-import oh.mycode.ohmycode.security.jwt.JwtFilter;
-import oh.mycode.ohmycode.security.service.UserDetailServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -16,7 +13,9 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
-
+import oh.mycode.ohmycode.security.jwt.JwtEntryPoint;
+import oh.mycode.ohmycode.security.jwt.JwtFilter;
+import oh.mycode.ohmycode.security.service.UserDetailServiceImpl;
 @Configuration
 @EnableWebSecurity
 public class MainSecurityConfig {
@@ -42,7 +41,7 @@ public class MainSecurityConfig {
 		authenticationManager = builder.build();
 		http.authenticationManager(authenticationManager);
 		http.csrf().disable().cors().disable();
-		http.authorizeRequests().antMatchers("/auth/**").permitAll().anyRequest().authenticated();
+	//	http.authorizeRequests().antMatchers("/auth/**").permitAll().anyRequest().authenticated();
 		http.exceptionHandling().authenticationEntryPoint(jwtEntryPoint);
 		http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
 		http.addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class);
