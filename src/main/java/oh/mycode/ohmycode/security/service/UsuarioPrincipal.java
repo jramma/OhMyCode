@@ -3,7 +3,7 @@ package oh.mycode.ohmycode.security.service;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import oh.mycode.ohmycode.security.domain.Usuario;
+import oh.mycode.ohmycode.model.Usuario;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;

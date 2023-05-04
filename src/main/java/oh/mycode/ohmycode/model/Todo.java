@@ -19,11 +19,11 @@ public class Todo {
 
     private boolean completed;
 
-    private User user;
+    private Usuario user;
     // ManyToOne
 
 
-    public Todo(String title, User user) {
+    public Todo(String title, Usuario user) {
         this.title = title;
         this.user = user;
         this.completed = false;

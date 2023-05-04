@@ -1,8 +1,9 @@
 package oh.mycode.ohmycode.security.service;
 
 
-import oh.mycode.ohmycode.security.domain.Usuario;
-import oh.mycode.ohmycode.security.repository.UserRepository;
+
+import oh.mycode.ohmycode.model.Usuario;
+import oh.mycode.ohmycode.repos.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -19,10 +20,10 @@ public class UserDetailServiceImpl implements UserDetailsService {
 
 	@Override
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-		Optional<Usuario> usuario = repository.findByUsername(username);
-		if (!usuario.isPresent())
+		Usuario usuario = repository.findByUsername(username);
+		if (usuario == null)
 			return null;
-		return UsuarioPrincipal.build(usuario.get());
+		return UsuarioPrincipal.build(usuario);
 	}
 
 }

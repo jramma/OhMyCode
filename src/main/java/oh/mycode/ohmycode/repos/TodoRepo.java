@@ -1,7 +1,7 @@
 package oh.mycode.ohmycode.repos;
 
 import oh.mycode.ohmycode.model.Todo;
-import oh.mycode.ohmycode.model.User;
+import oh.mycode.ohmycode.model.Usuario;
 import org.springframework.data.mongodb.repository.MongoRepository;
 import org.springframework.data.mongodb.repository.Query;
 
@@ -12,7 +12,7 @@ public interface TodoRepo extends MongoRepository<Todo, String> {
     @Query("{ }")
     List<Todo> findTodosOrderedByUser();
 
-    void deleteByUser(User usuario);
+    void deleteByUser(Usuario usuario);
 
     Todo findTodoById(int id);
 }

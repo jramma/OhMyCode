@@ -3,7 +3,7 @@ package oh.mycode.ohmycode.controller;
 
 import oh.mycode.ohmycode.dto.TodoDto;
 import oh.mycode.ohmycode.model.Todo;
-import oh.mycode.ohmycode.model.User;
+import oh.mycode.ohmycode.model.Usuario;
 import oh.mycode.ohmycode.service.TodoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -85,7 +85,7 @@ public class TodoController {
         Todo todo1 = new Todo();
         if (todoNotSaved.getId() == 0) {
             id = Increment.autoIncrement(alltodo);
-            User user = todoService.findByUsername(username);
+            Usuario user = todoService.findByUsername(username);
             todo1 = new Todo(id, todoNotSaved.getTitle(), todoNotSaved.isCompleted(), user);
         } else {
             id = todoNotSaved.getId();

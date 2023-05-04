@@ -3,7 +3,7 @@ package oh.mycode.ohmycode.security.controller;
 
 import jakarta.validation.Valid;
 import oh.mycode.ohmycode.exception.AttributeException;
-import oh.mycode.ohmycode.security.domain.Usuario;
+import oh.mycode.ohmycode.model.Usuario;
 import oh.mycode.ohmycode.security.dto.CreateUserDto;
 import oh.mycode.ohmycode.security.dto.JwtTokenDto;
 import oh.mycode.ohmycode.security.dto.LoginUserDto;

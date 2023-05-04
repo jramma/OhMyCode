@@ -1,7 +1,7 @@
 package oh.mycode.ohmycode.util;
 
 import oh.mycode.ohmycode.model.Todo;
-import oh.mycode.ohmycode.model.User;
+import oh.mycode.ohmycode.model.Usuario;
 
 import java.util.Comparator;
 import java.util.List;
@@ -18,12 +18,12 @@ public class Increment {
         return id;
     }
 
-    public static int idIncrement(List<User> list) {
+    public static int idIncrement(List<Usuario> list) {
         int id;
         if (list.isEmpty()) {
             id = 1;
         } else {
-            id = list.stream().max(Comparator.comparing(User::getId)).get().getId() + 1;
+            id = list.stream().max(Comparator.comparing(Usuario::getId)).get().getId() + 1;
         }
         return id;
     }

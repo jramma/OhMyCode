@@ -2,13 +2,13 @@ package oh.mycode.ohmycode.security.service;
 
 
 import oh.mycode.ohmycode.exception.AttributeException;
-import oh.mycode.ohmycode.security.domain.Usuario;
+import oh.mycode.ohmycode.model.Usuario;
+import oh.mycode.ohmycode.repos.UserRepository;
 import oh.mycode.ohmycode.security.dto.CreateUserDto;
 import oh.mycode.ohmycode.security.dto.JwtTokenDto;
 import oh.mycode.ohmycode.security.dto.LoginUserDto;
 import oh.mycode.ohmycode.security.dto.Rol;
 import oh.mycode.ohmycode.security.jwt.JwtProvider;
-import oh.mycode.ohmycode.security.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -19,6 +19,7 @@ import org.springframework.stereotype.Service;
 
 
 import java.util.List;
+
 import java.util.Optional;
 import java.util.stream.Collectors;
 
@@ -61,7 +62,7 @@ public class UserService {
 		return new JwtTokenDto(token);
 	}
 
-	public Optional<Usuario> getUser(String name) {
+	public Usuario getUser(String name) {
 		return userRepo.findByUsername(name);
 	}
 	public Usuario saveUser(Usuario usuario) {

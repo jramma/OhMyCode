@@ -42,8 +42,7 @@ public class MainSecurityConfig {
 		authenticationManager = builder.build();
 		http.authenticationManager(authenticationManager);
 		http.csrf().disable().cors().disable();
-		http.authorizeRequests().antMatchers("/**").permitAll().anyRequest().authenticated();
-	//	http.authorizeRequests().antMatchers("/auth/**").permitAll().anyRequest().authenticated();
+		http.authorizeRequests().antMatchers("/auth/**").permitAll().anyRequest().authenticated();
 		http.exceptionHandling().authenticationEntryPoint(jwtEntryPoint);
 		http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
 		http.addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class);
