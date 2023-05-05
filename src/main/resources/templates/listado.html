@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 
-<html lang="en" xmlns:th="https://www.thymeLeaf.org" xmlns:v-on="http://www.w3.org/1999/xhtml"
-    xmlns:v-bind="http://www.w3.org/1999/xhtml">
+<html lang="en" xmlns:th="https://www.thymeLeaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+
 
 <head>
     <meta charset="utf-8">
@@ -31,6 +31,8 @@
                 <li class="nav-item">
                     <a class="nav-link active" aria-current="page" href="/login">Login</a>
                 </li>
+                <li sec:authorize="isAuthenticated()"><a th:href="@{/logout}">Cerrar
+                    sesión</a></li>
             </ul>
         </div>
     </div>

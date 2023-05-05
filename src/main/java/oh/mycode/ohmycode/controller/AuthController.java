@@ -1,5 +1,6 @@
 package oh.mycode.ohmycode.controller;
 
+import oh.mycode.ohmycode.dto.LoginDto;
 import org.springframework.ui.Model;
 import oh.mycode.ohmycode.dto.UserNotRegistredDto;
 import oh.mycode.ohmycode.service.UserService;
@@ -23,18 +24,15 @@ public class AuthController {
         return "signup";
     }
 
-    @PostMapping("/signup")
+    @PostMapping("/login")
     public String signUp(@ModelAttribute("usuarioNoRegistrado") UserNotRegistredDto userDto){
         userService.save(userDto);
         return "redirect:/signup";
     }
 
-    @GetMapping("/login")
-    public String showLogin(Model model) {
-        UserNotRegistredDto usuarioNoRegistrado = new UserNotRegistredDto();
-        model.addAttribute("usuarioNoRegistrado", usuarioNoRegistrado);
-        return "redirect:signup?success";
-    }
+
+
+
 
 
 }
