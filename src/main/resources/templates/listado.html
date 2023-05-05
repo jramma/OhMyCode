@@ -13,32 +13,33 @@
 
 <body>
 
-    <nav class="navbar navbar-expand-lg bg-body-tertiary">
-        <div class="container-fluid">
-            <a class="navbar-brand" href="#">TodoList</a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+<nav class="navbar navbar-expand-lg bg-body-tertiary">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="/">TodoList</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
                 aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav">
-                    <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="/add">Add ToDo</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="/login">Sign In</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="/login">Login</a>
-                    </li>
-                </ul>
-            </div>
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav">
+                <li class="nav-item" th:if="${#authorization.expression('isAuthenticated()')}">
+                    <a class="nav-link active" aria-current="page" href="/add">Add ToDo</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" href="/signup">Sign Up</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" href="/login">Login</a>
+                </li>
+            </ul>
         </div>
-    </nav>
+    </div>
+</nav>
 
 
 
-    <h1>
+
+<h1>
         Todo List
     </h1>
     <table class="table">
@@ -48,7 +49,7 @@
                 <th>Username</th>
                 <th>Country</th>
                 <th>Done</th>
-                <th>Actions</th>
+                <th th:if="${#authorization.expression('isAuthenticated()')}">Actions</th>
             </tr>
         </thead>
         <tbody>
@@ -57,7 +58,7 @@
                 <td th:text="${todo.username}"></td>
                 <td th:text="${todo.country}"></td>
                 <td th:text="${todo.completed}"></td>
-                <td>
+                <td th:if="${#authorization.expression('isAuthenticated()')}">
                     <button type="button" class="btn btn-primary" th:data-id="${todo.id}" onclick="editTodo(this)">Edit</button>
                     <button type="button" class="btn btn-danger">Delete</button>
                 </td>
