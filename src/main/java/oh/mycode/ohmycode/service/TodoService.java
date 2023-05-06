@@ -2,9 +2,9 @@ package oh.mycode.ohmycode.service;
 
 import oh.mycode.ohmycode.dto.TodoDto;
 import oh.mycode.ohmycode.model.Todo;
-import oh.mycode.ohmycode.model.User;
+import oh.mycode.ohmycode.model.Usuario;
 import oh.mycode.ohmycode.repos.TodoRepo;
-import oh.mycode.ohmycode.repos.UserRepo;
+import oh.mycode.ohmycode.repos.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -17,12 +17,12 @@ public class TodoService {
     TodoRepo todoRepo;
 
     @Autowired
-    UserRepo userRepo;
+    UserRepository userRepo;
 
     public List<Todo> allTodos() {
         return todoRepo.findAll();
     }
-    public List<User> allUser() {
+    public List<Usuario> allUser() {
         return userRepo.findAll();
     }
     public Todo saveTodo(Todo todo){
@@ -36,21 +36,30 @@ public class TodoService {
                         todo.getId(),
                         todo.getTitle(),
                         todo.getUser().getUsername(),
-                        todo.getUser().getAddress().getCity(),
+                        todo.getUser().getAddress().getCountry(),
                         todo.isCompleted()
                 ))
                 .collect(Collectors.toList());
     }
 
-    public User saveUser(User user){
+    public Usuario saveUser(Usuario user){
         return userRepo.save(user);
     }
 
-    public User findByUsername(String username){
+    public Usuario findByUsername(String username){
         return userRepo.findByUsername(username);
     }
     public Todo getToDoById(int id){
         return todoRepo.findTodoById(id);
     }
+
+    public void deleteTodo(int id) {
+        todoRepo.deleteTodoById(id);
+    }
+
+    public Todo updateTodo(Todo todo){
+        return todoRepo.save(todo);
+    };
+
 
 }
