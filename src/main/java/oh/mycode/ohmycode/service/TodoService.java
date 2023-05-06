@@ -50,11 +50,11 @@ public class TodoService {
         return userRepo.findByUsername(username);
     }
     public Todo getToDoById(int id){
-        return todoRepo.findTodoById0(id);
+        return todoRepo.findTodoById(id);
     }
 
     public void deleteTodo(int id) {
-        todoRepo.deleteTodoById0(id);
+        todoRepo.deleteTodoById(id);
     }
 
     public Todo updateTodo(Todo todo){
