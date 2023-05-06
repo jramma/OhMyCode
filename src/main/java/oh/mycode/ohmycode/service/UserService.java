@@ -1,7 +1,7 @@
 package oh.mycode.ohmycode.service;
 
 import oh.mycode.ohmycode.dto.UserNotRegistredDto;
-import oh.mycode.ohmycode.model.Address;
+import oh.mycode.ohmycode.dto.Address;
 import oh.mycode.ohmycode.model.Usuario;
 import oh.mycode.ohmycode.repos.UserRepository;
 import oh.mycode.ohmycode.util.Increment;

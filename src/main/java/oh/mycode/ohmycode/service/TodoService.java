@@ -1,13 +1,11 @@
 package oh.mycode.ohmycode.service;
 
-import oh.mycode.ohmycode.dto.LoginDto;
 import oh.mycode.ohmycode.dto.TodoDto;
 import oh.mycode.ohmycode.model.Todo;
 import oh.mycode.ohmycode.model.Usuario;
 import oh.mycode.ohmycode.repos.TodoRepo;
 import oh.mycode.ohmycode.repos.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -52,11 +50,16 @@ public class TodoService {
         return userRepo.findByUsername(username);
     }
     public Todo getToDoById(int id){
-        return todoRepo.findTodoById(id);
+        return todoRepo.findTodoById0(id);
     }
-    public void deleteTodo(int id){todoRepo.deleteTodoById(id);}
 
-    public boolean comproveUser(LoginDto usuario) {
-        return userRepo.existsByPassword(new BCryptPasswordEncoder().encode(usuario.getPassword()));
+    public void deleteTodo(int id) {
+        todoRepo.deleteTodoById0(id);
     }
+
+    public Todo updateTodo(Todo todo){
+        return todoRepo.save(todo);
+    };
+
+
 }

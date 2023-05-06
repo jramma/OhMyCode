@@ -1,7 +1,6 @@
 package oh.mycode.ohmycode.dto;
 
 import lombok.Data;
-import oh.mycode.ohmycode.model.Address;
 
 @Data
 public class UserNotRegistredDto {

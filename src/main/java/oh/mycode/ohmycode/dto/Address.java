@@ -1,4 +1,4 @@
-package oh.mycode.ohmycode.model;
+package oh.mycode.ohmycode.dto;
 
 
 import lombok.AllArgsConstructor;
@@ -11,7 +11,6 @@ import org.springframework.data.mongodb.core.mapping.Document;
 @NoArgsConstructor
 @Getter
 @Setter
-@Document(collection = "address")
 public class Address {
 
     private String street;

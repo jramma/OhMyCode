@@ -27,40 +27,44 @@
     </div>
 </nav>
 
-<form th:object="${todoNotSaved}" method="POST" id="todoForm">
-    <input type="hidden" name="id" th:value="${todoNotSaved.id}" id="todoId">
-    <input type="hidden" name="_method" th:value="${todoNotSaved.id == 0 ? 'POST' : 'PUT'}" id="todoMethod">
 
-    <div class="mb-3">
-        <label class="form-label">Title</label>
-        <input type="text" name="text" th:field="*{title}" class="form-control" placeholder="Introduce the Todo"
-               maxlength="200" required>
-    </div>
 
-    <div class="col-md">
-        <div class="form-floating">
-            <select class="form-select" id="floatingSelectGrid" name="user"
-                    onchange="document.getElementById('username').value=this.options[this.selectedIndex].text;">
-                <option selected disabled>Selecciona un usuario</option>
-                <option th:each="user : ${users}" th:value="*{username}" th:text="${user.username}" required></option>
-            </select>
-            <label for="floatingSelectGrid">User</label>
+<div id="container">
+    <form th:action="@{/saveTodo}" th:object="${todoNotSaved}" method="POST" id="todoForm">
+        <input type="hidden" name="id" th:value="${id}" id="todoId">
+        <div class="mb-3">
+            <label class="form-label">Title</label>
+            <input type="text" name="text" th:field="*{title}" class="form-control" placeholder="Introduce the Todo"
+                   maxlength="200" required>
         </div>
-    </div>
-    <input type="hidden" name="username" id="username" th:value="${todoNotSaved.username}"/>
-    <br>
-    <div class="col-md">
-        <div class="form-floating">
-            <select class="form-select" id="floatingSelectGrid2" name="completed" th:field="*{completed}">
-                <option value="false">Not completed</option>
-                <option value="true">Completed</option>
-            </select>
-            <label for="floatingSelectGrid2">Completed</label>
+        <div class="col-md">
+            <div class="form-floating">
+                <select class="form-select" id="floatingSelectGrid" name="user"
+                        onchange="document.getElementById('username').value=this.options[this.selectedIndex].text;">
+                    <option selected disabled>Selecciona un usuario</option>
+                    <option th:each="user : ${users}" th:value="*{username}" th:text="${user.username}"
+                            required></option>
+                </select>
+                <label for="floatingSelectGrid">User</label>
+            </div>
         </div>
-    </div>
-    <br>
-    <button type="submit" class="btn btn-primary">Add Todo</button>
-</form>
+        <input type="hidden" name="username" id="username" th:value="${todoNotSaved.username}"/>
+        <br>
+        <div class="col-md">
+            <div class="form-floating">
+                <select class="form-select" id="floatingSelectGrid2" name="completed" th:field="*{completed}">
+                    <option value="false">Not completed</option>
+                    <option value="true">Completed</option>
+                </select>
+                <label for="floatingSelectGrid2">Completed</label>
+            </div>
+        </div>
+        <br>
+        <button type="submit" class="btn btn-primary">Add Todo</button>
+    </form>
+</div>
+
+
 <script type="text/javascript" th:src="@{/js/index.js}"></script>
 
 </body>

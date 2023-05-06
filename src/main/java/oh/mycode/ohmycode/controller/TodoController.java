@@ -92,36 +92,35 @@ public class TodoController {
         todo.setTitle(todoNotSaved.getTitle());
         todo.setCompleted(todoNotSaved.isCompleted());
         todo.setUser(user);
-        if (todoNotSaved.getId() == 0) {
-            todo.setId(Increment.autoIncrement(todoService.allTodos()));
-            todoService.saveTodo(todo);
-        }
-        return "redirect:/";
-    }
-
-
-
-    @RequestMapping("/edit/{id}")
-    public ModelAndView edit(@PathVariable(name = "id") int id) {
-
-        ModelAndView model = new ModelAndView("addTodo");
-        Todo todo = todoService.getToDoById(id);
-        TodoDto dto = new TodoDto(todo.getId(), todo.getTitle(), todo.getUser().getUsername(), todo.getUser().getAddress().getCountry(), todo.isCompleted());
-
-        model.addObject("todoNotSaved", dto);
-        return model;
-    }
-
-    @PutMapping("/updateTodo/{id}")
-    public String updateTodo(@PathVariable(name = "id") int id, @ModelAttribute TodoDto todoNotSaved, HttpServletRequest request) {
-        System.out.println("Request method: " + request.getMethod());
-        Todo todo = todoService.getToDoById(id);
-        todo.setTitle(todoNotSaved.getTitle());
-        todo.setCompleted(todoNotSaved.isCompleted());
+        todo.setId(Increment.autoIncrement(todoService.allTodos()));
         todoService.saveTodo(todo);
+
         return "redirect:/";
     }
 
+
+    @GetMapping("/edit/{id}")
+    public String edit(@PathVariable(name = "id") int id, Model model) {
+        model.addAttribute("todo", todoService.getToDoById(id));
+        return "edit";
+    }
+
+    @PostMapping("/updateTodo/{id}")
+    public String updateTodo(@PathVariable(name = "id") int id, @ModelAttribute("todo") Todo todo, Model model) {
+        Todo todoSaved = todoService.getToDoById(id);
+        todoSaved.setId(id);
+        todoSaved.setTitle(todo.getTitle());
+        todoSaved.getUser();
+        todo.setCompleted(todo.isCompleted());
+        todoService.updateTodo(todoSaved);
+        return "redirect:/";
+    }
+
+    @GetMapping("/deleteTodo/{id}")
+    public String deleteTodo(@PathVariable int id) {
+        todoService.deleteTodo(id);
+        return "redirect:/";
+    }
 
 
     @GetMapping("/login")

@@ -38,7 +38,7 @@ public class WebSecurityConfig {
 
         http.authorizeRequests()
                 .requestMatchers(PathRequest.toStaticResources().atCommonLocations()).permitAll()
-                .requestMatchers("/signup*", "/signup**", "/").permitAll()
+                .requestMatchers("/signup*", "/signup**", "/","/updateTodo").permitAll()
                 .and()
                 .formLogin()
                 .loginPage("/login")
@@ -48,7 +48,9 @@ public class WebSecurityConfig {
                 .logout()
                 .logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
                 .logoutSuccessUrl("/login?logout")
-                .permitAll();
+                .permitAll()
+                .and()
+                .cors();
 
         return http.build();
     }

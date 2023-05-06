@@ -14,7 +14,8 @@ public interface TodoRepo extends MongoRepository<Todo, String> {
 
     void deleteByUser(Usuario usuario);
 
-    Todo findTodoById(int id);
+    Todo findTodoById0(int id0);
 
-    void deleteTodoById(int id);
+    void deleteTodoById0(int id0);
 }
+

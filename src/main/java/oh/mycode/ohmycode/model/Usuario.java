@@ -4,9 +4,9 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import oh.mycode.ohmycode.dto.Address;
+import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
-
-import java.util.List;
 
 
 @AllArgsConstructor
@@ -16,7 +16,7 @@ import java.util.List;
 @Document(collection = "user")
 public class Usuario {
 
-
+    @Id
     private int id;
     private String name;
 
