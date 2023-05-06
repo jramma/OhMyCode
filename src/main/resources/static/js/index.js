@@ -22,20 +22,19 @@ function deleteTodo(button) {
 }
 
 
- var todoForm = document.getElementById('todoForm');
-    var todoId = document.getElementById('todoId').value;
-    var todoMethod = document.getElementById('todoMethod').value;
-    var submitButton = document.getElementById('submitButton');
+    // Obtener el formulario y el campo _method
+    const todoForm = document.getElementById('todoId');
+    const methodField = todoForm.querySelector('input[name="_method"]');
 
-    if (todoId !== '0') {
-        todoForm.action = '/updateTodo/' + todoId;
-        todoForm.method = 'PUT';
-    }
-
-    submitButton.addEventListener('click', function() {
-        if (todoId === '0') {
+    // Agregar un evento al formulario que actualiza el valor del campo _method
+    todoForm.addEventListener('submit', function(event) {
+        if (todoForm.elements.id.value != 0) {
+            methodField.value = 'PUT';
+            todoForm.action = '/updateTodo/' + todoForm.elements.id.value;
+        } else {
+            methodField.value = 'POST';
             todoForm.action = '/saveTodo';
-            todoForm.method = 'POST';
         }
     });
+
 

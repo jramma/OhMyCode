@@ -27,11 +27,10 @@
     </div>
 </nav>
 
-<form th:object="${todoNotSaved}" th:method="${todoNotSaved.id == 0 ? 'POST' : 'PUT'}"
-      th:action="@{${todoNotSaved.id == 0 ? '/saveTodo' : '/updateTodo/' + todoNotSaved.id}}">
-    <input type="hidden" name="_method" value="PUT" th:disabled="${todoNotSaved.id == 0} ? 'disabled' : ''"/>
-    <input type="hidden" name="id" th:value="${todoNotSaved.id}"/>
-    <input type="hidden" name="_method" value="PUT" th:if="${todoNotSaved.id != null}">
+<form th:object="${todoNotSaved}" method="POST" id="todoForm">
+    <input type="hidden" name="id" th:value="${todoNotSaved.id}" id="todoId">
+    <input type="hidden" name="_method" th:value="${todoNotSaved.id == 0 ? 'POST' : 'PUT'}" id="todoMethod">
+
     <div class="mb-3">
         <label class="form-label">Title</label>
         <input type="text" name="text" th:field="*{title}" class="form-control" placeholder="Introduce the Todo"
