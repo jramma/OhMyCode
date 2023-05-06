@@ -12,18 +12,11 @@ Páginado a 10:
 
 https://user-images.githubusercontent.com/107991714/236172203-b26fc105-388a-43dd-8686-ec5885fea5da.mp4
 
-
 # Pantalla creación de TODOs
 
 -Endpoint: http://localhost:8080/add
 
 https://user-images.githubusercontent.com/107991714/236172306-af921516-ec8b-46bf-b152-5f5090132a12.mp4
-
-
-# Pantalla de edición de TODOs
-
--Endpoint: http://localhost:8080/edit/{id}
-
 
 # Security
 
