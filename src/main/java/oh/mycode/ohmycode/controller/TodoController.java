@@ -86,15 +86,14 @@ public class TodoController {
     }
 
     @PostMapping("/saveTodo")
-    public String saveOrUpdate(@ModelAttribute TodoDto todoNotSaved, @RequestParam("username") String username) {
-        Usuario user = todoService.findByUsername(username);
+    public String saveOrUpdate(@ModelAttribute TodoDto todoNotSaved) {
+        Usuario user = todoService.findByUsername(todoNotSaved.getUsername());
         Todo todo = new Todo();
         todo.setTitle(todoNotSaved.getTitle());
         todo.setCompleted(todoNotSaved.isCompleted());
         todo.setUser(user);
         todo.setId(Increment.autoIncrement(todoService.allTodos()));
         todoService.saveTodo(todo);
-
         return "redirect:/";
     }
 

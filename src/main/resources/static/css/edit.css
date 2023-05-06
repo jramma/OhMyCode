@@ -1,0 +1,71 @@
+nav{
+  background-color: #003366;
+}
+body {
+  font-family: Arial, sans-serif;
+  background-color: #003366;
+}
+#todoForm{
+  background-color: #5da6ef;
+  padding: 3rem;
+  width: 70%;
+  border-radius: 2rem;
+  margin-top: 2rem;
+transition: 1s;
+}
+
+#formPut{
+  background-color: #a2f6b6;
+  padding: 3rem;
+  width: 70%;
+  border-radius: 2rem;
+  margin-top: 2rem;
+transition: 1s;
+
+
+
+
+}
+/* Estilos de navegación */
+#todoForm:hover{
+  background-color: #5da6ef;
+  padding: 3rem;
+  width: 70%;
+  border-radius: 2rem;
+  margin-top: 2rem;
+  box-shadow: 8px 8px 16px rgba(0, 0, 0, 0.4);
+  transition: 1s;
+}
+.navbar {
+  color: #000000;
+}
+
+.navbar a {
+  color: #000000;
+}
+
+
+/* Estilos del formulario */
+
+#container {
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.form-label {
+  font-weight: bold;
+}
+
+.form-control {
+  border-radius: 0;
+}
+
+.form-floating select {
+  border-radius: 0;
+}
+
+.btn-success:hover {
+  background-color: #00994d;
+  border-color: #00994d;
+}
+
