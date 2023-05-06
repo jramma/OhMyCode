@@ -1,15 +1,18 @@
 package oh.mycode.ohmycode.controller;
 
 
+import jakarta.servlet.http.HttpServletRequest;
 import oh.mycode.ohmycode.dto.TodoDto;
 import oh.mycode.ohmycode.model.Todo;
-import oh.mycode.ohmycode.model.User;
+import oh.mycode.ohmycode.model.Usuario;
 import oh.mycode.ohmycode.service.TodoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.ui.Model;
@@ -31,7 +34,11 @@ public class TodoController {
 
 
     @GetMapping("/")
-    public String inicio(@RequestParam Map<String, Object> params, Model model) {
+    public String inicio(@RequestParam Map<String, Object> params, Model model, @AuthenticationPrincipal UserDetails userDetails) {
+        String username = "null";
+        if (userDetails != null) {
+            username = userDetails.getUsername();
+        }
 
         int page = params.get("page") != null ? (Integer.valueOf(params.get("page").toString()) - 1) : 0;
 
@@ -43,7 +50,7 @@ public class TodoController {
             List<Integer> pages = IntStream.rangeClosed(1, totalPage).boxed().collect(Collectors.toList());
             model.addAttribute("pages", pages);
         }
-
+        model.addAttribute("username", username);
         model.addAttribute("todos", pageTodo.getContent());
         model.addAttribute("current", page + 1);
         model.addAttribute("next", page + 2);
@@ -79,33 +86,46 @@ public class TodoController {
     }
 
     @PostMapping("/saveTodo")
-    public String saveTodo(@ModelAttribute TodoDto todoNotSaved, @RequestParam("username") String username) {
-        List<Todo> alltodo = todoService.allTodos();
-        int id = 0;
-        Todo todo1 = new Todo();
-        if (todoNotSaved.getId() == 0) {
-            id = Increment.autoIncrement(alltodo);
-            User user = todoService.findByUsername(username);
-            todo1 = new Todo(id, todoNotSaved.getTitle(), todoNotSaved.isCompleted(), user);
-        } else {
-            id = todoNotSaved.getId();
-            todo1 = todoService.getToDoById(id);
-            todo1.setTitle(todoNotSaved.getTitle());
-            todo1.setCompleted(todoNotSaved.isCompleted());
-        }
-        todoService.saveTodo(todo1);
+    public String saveOrUpdate(@ModelAttribute TodoDto todoNotSaved, @RequestParam("username") String username) {
+        Usuario user = todoService.findByUsername(username);
+        Todo todo = new Todo();
+        todo.setTitle(todoNotSaved.getTitle());
+        todo.setCompleted(todoNotSaved.isCompleted());
+        todo.setUser(user);
+        todo.setId(Increment.autoIncrement(todoService.allTodos()));
+        todoService.saveTodo(todo);
 
         return "redirect:/";
     }
 
 
-    @RequestMapping("/edit/{id}")
-    public ModelAndView edit(@PathVariable(name = "id") int id) {
-        ModelAndView model = new ModelAndView("addTodo");
-        Todo todo = todoService.getToDoById(id);
-        TodoDto dto = new TodoDto(todo.getId(), todo.getTitle(), todo.getUser().getUsername(), todo.getUser().getAddress().getCountry(), todo.isCompleted());
-        model.addObject("todoNotSaved", dto);
-        return model;
+    @GetMapping("/edit/{id}")
+    public String edit(@PathVariable(name = "id") int id, Model model) {
+        model.addAttribute("todo", todoService.getToDoById(id));
+        return "edit";
+    }
+
+    @PostMapping("/updateTodo/{id}")
+    public String updateTodo(@PathVariable(name = "id") int id, @ModelAttribute("todo") Todo todo, Model model) {
+        Todo todoSaved = todoService.getToDoById(id);
+        todoSaved.setId(id);
+        todoSaved.setTitle(todo.getTitle());
+        todoSaved.getUser();
+        todo.setCompleted(todo.isCompleted());
+        todoService.updateTodo(todoSaved);
+        return "redirect:/";
+    }
+
+    @GetMapping("/deleteTodo/{id}")
+    public String deleteTodo(@PathVariable int id) {
+        todoService.deleteTodo(id);
+        return "redirect:/";
+    }
+
+
+    @GetMapping("/login")
+    public String showLogin(Model model) {
+        return "login";
     }
 
 
