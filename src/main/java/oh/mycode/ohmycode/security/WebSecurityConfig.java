@@ -6,9 +6,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.security.servlet.PathRequest;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -21,6 +23,7 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 
 @Configuration
 @AllArgsConstructor
+@EnableWebSecurity
 public class WebSecurityConfig {
     @Autowired
     private final UserDetailsService userDetailsService;
@@ -28,31 +31,27 @@ public class WebSecurityConfig {
     private final JWTAuthorizationFilter jwtAuthFilter;
 
     @Bean
-    SecurityFilterChain filterChain(HttpSecurity http, AuthenticationManager authManager) throws Exception {
+    public SecurityFilterChain filterChain(HttpSecurity http, AuthenticationManager authManager) throws Exception {
         JWTAuthenticationFilter authentication = new JWTAuthenticationFilter();
         authentication.setAuthenticationManager(authManager);
         authentication.setFilterProcessesUrl("/login");
 
-        http
-                .csrf().disable()
-                .authorizeRequests()
+        http.authorizeRequests()
                 .requestMatchers(PathRequest.toStaticResources().atCommonLocations()).permitAll()
-                .requestMatchers("/", "/signup", "/signup?success").permitAll()
-                .requestMatchers("/login**").permitAll()
-                .anyRequest().authenticated()
+                .requestMatchers("/signup*", "/signup**", "/").permitAll()
                 .and()
-                .formLogin().loginPage("/login").permitAll()
+                .formLogin()
+                .loginPage("/login")
+                .defaultSuccessUrl("/", true)
+                .permitAll()
                 .and()
-                .logout().logoutRequestMatcher(new AntPathRequestMatcher("/logout")).logoutSuccessUrl("/login?logout").permitAll()
-                .and()
-                .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
-                .and()
-                .addFilter(authentication)
-                .addFilterBefore(jwtAuthFilter, UsernamePasswordAuthenticationFilter.class);
+                .logout()
+                .logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
+                .logoutSuccessUrl("/login?logout")
+                .permitAll();
 
         return http.build();
     }
-
 
 
     @Bean
@@ -63,7 +62,6 @@ public class WebSecurityConfig {
                 .and()
                 .build();
     }
-
 
     @Bean
     PasswordEncoder passwordEncoder() {

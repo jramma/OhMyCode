@@ -16,9 +16,9 @@ public class UserService {
     @Autowired
     UserRepository userRepo;
 
-    public void save(UserNotRegistredDto userDto) {
+    public boolean save(UserNotRegistredDto userDto) {
         Optional yaexiste = userRepo.findOneByUsername(userDto.getUsername());
-
+        boolean success = false;
         if (yaexiste.isEmpty()) {
             int id = Increment.idIncrement(userRepo.findAll());
             Address address = new Address(userDto.getStreet(),
@@ -31,8 +31,8 @@ public class UserService {
                     new BCryptPasswordEncoder().encode(userDto.getPassword()),
                     address);
             userRepo.save(usuario);
-
+            success = true;
         }
-
+        return success;
     }
 }

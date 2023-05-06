@@ -24,15 +24,17 @@ public class AuthController {
         return "signup";
     }
 
-    @PostMapping("/login")
-    public String signUp(@ModelAttribute("usuarioNoRegistrado") UserNotRegistredDto userDto){
-        userService.save(userDto);
-        return "redirect:/signup";
+    @PostMapping("/signup")
+    public String signUp(@ModelAttribute("usuarioNoRegistrado") UserNotRegistredDto userDto) {
+        boolean success = userService.save(userDto);
+        String answer;
+        if (!success) {
+            answer = "redirect:/signup?error";
+        } else {
+            answer = "redirect:/signup?success";
+        }
+        return answer;
     }
-
-
-
-
 
 
 }

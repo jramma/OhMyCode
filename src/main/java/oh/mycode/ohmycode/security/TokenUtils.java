@@ -52,5 +52,15 @@ public class TokenUtils {
         }
 
     }
+    public static String getUsernameFromToken(String token) {
+        Claims claims = Jwts.parserBuilder()
+                .setSigningKey(Keys.hmacShaKeyFor(ACCES_TOKEN_SECRET.getBytes()))
+                .build()
+                .parseClaimsJws(token)
+                .getBody();
 
+        String username = (String) claims.get("nombre");
+
+        return username;
+    }
 }
