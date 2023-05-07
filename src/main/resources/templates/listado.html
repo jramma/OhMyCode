@@ -36,6 +36,10 @@
         </div>
     </div>
 </nav>
+<div th:if="${param.error}">
+    <div class="alert alert-danger">Something is going wrong
+    </div>
+</div>
 <div th:if="${param.deleted}">
     <p>Todo deleted!</p>
 </div>

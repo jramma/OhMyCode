@@ -128,4 +128,9 @@ public class TodoController {
     }
 
 
+    @RequestMapping("/error")
+    public String handleError() {
+        return "redirect:/?error";
+    }
+
 }

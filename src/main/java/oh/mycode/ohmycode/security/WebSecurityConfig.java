@@ -38,7 +38,8 @@ public class WebSecurityConfig {
 
         http.authorizeRequests()
                 .requestMatchers(PathRequest.toStaticResources().atCommonLocations()).permitAll()
-                .requestMatchers("/signup*", "/signup**", "/","/updateTodo").permitAll()
+                .requestMatchers("/signup*", "/signup**", "/").permitAll()
+                .requestMatchers("/add","/edit**").authenticated()
                 .and()
                 .formLogin()
                 .loginPage("/login")

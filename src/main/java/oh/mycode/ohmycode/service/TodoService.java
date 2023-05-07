@@ -30,7 +30,7 @@ public class TodoService {
 
     }
     public List<TodoDto> allTodosCity() {
-        try {
+
             return allTodos()
                     .stream()
                     .map(todo -> new TodoDto(
@@ -41,9 +41,7 @@ public class TodoService {
                             todo.isCompleted()
                     ))
                     .collect(Collectors.toList());
-        } catch (Exception e) {
-            return null;
-        }
+
     }
 
     public Usuario saveUser(Usuario user){
