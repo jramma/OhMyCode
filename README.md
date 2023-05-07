@@ -24,3 +24,25 @@ https://user-images.githubusercontent.com/107991714/236646825-b2c7266d-d2c2-4bb2
 # Testing
 
 El testing se encuentra en src/test/java ahí tienes varios métodos de testing, tanto de controlador, como dto, repositorio y servicio.
+
+# Estructura
+
+En el archivo encontrarás la carpeta "src" el código Java y plantillas de front (html, thymeleaf...) se encuentran dentro de src en la carpeta main y los tests los tienes en la carpeta test. En el pom.xml encontrarás todas las dependencias importadas.
+
+![image](https://user-images.githubusercontent.com/107991714/236687564-b1e8432b-c873-419c-a4bd-bdf591bb546c.png)
+
+# Enpoints
+
+- http://localhost:8080/  >>> página principal con listado de TODOs
+- http://localhost:8080/login  >>> pantalla de login
+- http://localhost:8080/signup  >>> pantalla para darse de alta
+- http://localhost:8080/add   >>> pantalla de añadir TODO solo accesible si estas logueado
+- http://localhost:8080/edit   >>> pantalla de edición de TODO solo accesible si estas logueado
+- http://localhost:8080/saveTodo  >>> guardar TODO, solo accesible 
+- http://localhost:8080/error   >>> te redirecciona a principal, salta cuando algo va mal
+
+RestController, útil para Postman:
+
+- http://localhost:8080/getTodos  >>> necesitas el Bearer token, te da en JSON los TODOs
+- http://localhost:8080/getUsers  >>> necesitas el Bearer token, te da en JSON los Usuarios
+
