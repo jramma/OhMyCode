@@ -7,7 +7,7 @@ La base de datos solo tiene dos colecciones "todo" y "user"
 
 -Endpoint: http://localhost:8080/add
 
-https://user-images.githubusercontent.com/107991714/236172306-af921516-ec8b-46bf-b152-5f5090132a12.mp4
+https://user-images.githubusercontent.com/107991714/236688139-a680aa9b-8e17-4aba-a0e9-deec0df0f0a4.mp4
 
 # Security
 
