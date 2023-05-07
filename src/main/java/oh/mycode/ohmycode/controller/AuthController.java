@@ -1,6 +1,5 @@
 package oh.mycode.ohmycode.controller;
 
-import oh.mycode.ohmycode.dto.LoginDto;
 import org.springframework.ui.Model;
 import oh.mycode.ohmycode.dto.UserNotRegistredDto;
 import oh.mycode.ohmycode.service.UserService;

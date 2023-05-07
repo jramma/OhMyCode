@@ -30,16 +30,20 @@ public class TodoService {
 
     }
     public List<TodoDto> allTodosCity() {
-        return allTodos()
-                .stream()
-                .map(todo -> new TodoDto(
-                        todo.getId(),
-                        todo.getTitle(),
-                        todo.getUser().getUsername(),
-                        todo.getUser().getAddress().getCountry(),
-                        todo.isCompleted()
-                ))
-                .collect(Collectors.toList());
+        try {
+            return allTodos()
+                    .stream()
+                    .map(todo -> new TodoDto(
+                            todo.getId(),
+                            todo.getTitle(),
+                            todo.getUser().getUsername(),
+                            todo.getUser().getAddress().getCountry(),
+                            todo.isCompleted()
+                    ))
+                    .collect(Collectors.toList());
+        } catch (Exception e) {
+            return null;
+        }
     }
 
     public Usuario saveUser(Usuario user){
